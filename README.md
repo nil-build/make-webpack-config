@@ -82,7 +82,7 @@ const {
 
 const options = {
     mode: 'development',
-    devtool: 'evel',
+    devtool: 'eval',
 }
 
 //直接用默认构建函数
