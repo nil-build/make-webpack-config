@@ -2,6 +2,7 @@
 const webpackDevServer = require('webpack-dev-server');
 const { init } = require('./utils');
 const webpack = require("webpack");
+const merge = require("webpack-merge");
 const omit = require('object.omit');
 const opn = require("opn");
 
@@ -19,7 +20,7 @@ module.exports = async function (cfg = {}) {
 
     cfg = omit(cfg, ['devServer', 'watch']);
 
-    const webpackConfig = await init(cfg);
+    const webpackConfig = merge(await init(cfg), cfg.webpack || {});
 
     const compiler = webpack(webpackConfig);
 

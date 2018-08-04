@@ -42,6 +42,8 @@
     IgnorePlugin: [/^\.[\\/]locale$/, /moment$/],
     DefinePlugin: {},
     BannerPlugin: null,
+    htmlLoaderOptions: {},
+    rawLoaderRegexp: /\.txt$/,
     //启用模块
     "module": {
         "babel": true,

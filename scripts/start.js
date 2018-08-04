@@ -1,5 +1,6 @@
 const { init } = require('./utils');
 const webpack = require("webpack");
+const merge = require("webpack-merge");
 const omit = require('object.omit');
 
 module.exports = async function (cfg = {}) {
@@ -8,7 +9,7 @@ module.exports = async function (cfg = {}) {
 
     cfg = omit(cfg, ['devServer', 'watch']);
 
-    const webpackConfig = await init(cfg);
+    const webpackConfig = merge(await init(cfg), cfg.webpack || {});
     const compiler = webpack(webpackConfig);
 
     const compilerCb = function (err, stats) {
