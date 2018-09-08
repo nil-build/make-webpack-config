@@ -1,17 +1,18 @@
 const {
+    installDeps,
     normalizeConfig,
     getDepsFromConfig,
-    createWebpackConfig
+    createWebpackConfig,
 } = require('./lib');
 
 const build = require('./scripts/build');
 const server = require('./scripts/server');
 const start = require('./scripts/start');
-const utils = require('./scripts/utils');
 
 module.exports = {
+    installDeps,
     normalizeConfig,
-    initWebpackConfig: utils.init,
+    initWebpackConfig: installDeps,
     getDepsFromConfig,
     createWebpackConfig,
     build,

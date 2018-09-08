@@ -1,10 +1,12 @@
 
 const webpackDevServer = require('webpack-dev-server');
-const { init } = require('./utils');
+const isFunction = require('lodash.isfunction');
+const { installDeps, normalizeConfig, createWebpackConfig } = require('../lib');
 const webpack = require("webpack");
 const merge = require("webpack-merge");
 const omit = require('object.omit');
 const opn = require("opn");
+const log = require('../lib/logger');
 
 const options = {
     host: '127.0.0.1',
@@ -15,12 +17,18 @@ const options = {
     port: 9000,
 };
 
-module.exports = async function (cfg = {}) {
+module.exports = function (cfg = {}) {
+    if (isFunction(cfg)) {
+        cfg = cfg(normalizeConfig({}));
+    }
+
     const devServer = cfg.devServer || {};
 
     cfg = omit(cfg, ['devServer', 'watch']);
 
-    const webpackConfig = merge(await init(cfg), cfg.webpack || {});
+    installDeps(cfg);
+
+    const webpackConfig = merge(createWebpackConfig(cfg), cfg.webpack || {});
 
     const compiler = webpack(webpackConfig);
 
@@ -31,7 +39,7 @@ module.exports = async function (cfg = {}) {
     const server = new webpackDevServer(compiler, devServerOptions);
 
     server.listen(devServerOptions.port, devServerOptions.host, () => {
-        console.log('Starting server on http://%s:%d', devServerOptions.host, devServerOptions.port);
+        log('Starting server on http://%s:%d', devServerOptions.host, devServerOptions.port);
         opn(`http://${devServerOptions.host}:${devServerOptions.port}`);
     });
 

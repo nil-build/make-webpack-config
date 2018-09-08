@@ -1,23 +1,31 @@
-const { init } = require('./utils');
+const isFunction = require('lodash.isfunction');
+const { installDeps, normalizeConfig, createWebpackConfig } = require('../lib');
 const webpack = require("webpack");
 const merge = require("webpack-merge");
 const omit = require('object.omit');
+const log = require('../lib/logger');
 
-module.exports = async function (cfg = {}) {
+module.exports = function (cfg = {}) {
+    if (isFunction(cfg)) {
+        cfg = cfg(normalizeConfig({}));
+    }
+
     cfg.mode = 'production';
     const watch = cfg.watch;
 
     cfg = omit(cfg, ['devServer', 'watch']);
 
-    const webpackConfig = merge(await init(cfg), cfg.webpack || {});
+    installDeps(cfg);
+
+    const webpackConfig = merge(createWebpackConfig(cfg), cfg.webpack || {});
     const compiler = webpack(webpackConfig);
 
     const compilerCb = function (err, stats) {
         if (err) {
-            return console.log(err);
+            return log(err);
         }
 
-        console.log(stats.toString({
+        log(stats.toString({
             chunks: false,
             colors: true,
         }));
