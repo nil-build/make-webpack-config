@@ -16,6 +16,17 @@
     appEntryJs: "index.js", //   src/index.js
     appEntryHtml: "index.html", // src/index.html
     appEntryHtmlOpts: {},
+    cleanDist: false,
+    defines: null, // object
+    banner: null, // string function
+    ignore: null, // array
+    resolve: {},
+    externals: {},
+    performance: {},
+    target: 'web',
+    cnpm: false,
+    splitChunks: true,
+    optimization: {},
     assest: {
         css: {
             name: "[name].[contenthash:8].css",
@@ -33,7 +44,6 @@
             limit: 8192,
         }
     },
-    cleanDist: false,
     manifest: {
         enableMode: 'production',
     },

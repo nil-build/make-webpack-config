@@ -11,7 +11,7 @@ module.exports = function (cfg = {}) {
     }
 
     cfg.mode = 'production';
-    const watch = cfg.watch;
+    // const watch = cfg.watch;
 
     cfg = omit(cfg, ['devServer', 'watch']);
 
@@ -30,13 +30,7 @@ module.exports = function (cfg = {}) {
             colors: true,
         }));
     }
-    if (watch) {
-        compiler.watch({
-            aggregateTimeout: 300,
-            poll: undefined
-        }, compilerCb);
-    } else {
-        compiler.run(compilerCb);
-    }
+
+    compiler.run(compilerCb);
 
 }
