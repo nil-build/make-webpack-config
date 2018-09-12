@@ -11,7 +11,7 @@ module.exports = function (cfg = {}) {
     }
 
     cfg.mode = 'development';
-    const watch = cfg.watch || true;
+    const watch = cfg.watch;
 
     cfg = omit(cfg, ['devServer', 'watch']);
 
