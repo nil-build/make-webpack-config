@@ -27,6 +27,16 @@
     cnpm: false,
     splitChunks: true,
     optimization: {},
+    babelOptions: {
+        corejs: true,
+        helpers: true,
+        regenerator: true,
+        modules: "commonjs",
+        strictMode: true,
+        exclude: [
+            /(node_modules|bower_components)/m,
+        ]
+    },
     assest: {
         css: {
             name: "[name].[contenthash:8].css",
