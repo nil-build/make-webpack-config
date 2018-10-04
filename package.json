@@ -1,6 +1,6 @@
 {
     "name": "make-webpack-config",
-    "version": "1.5.2",
+    "version": "1.5.3",
     "description": "",
     "keywords": [
         "react",
@@ -45,6 +45,7 @@
         "webpack": "^4.16.3",
         "webpack-dev-server": "^3.1.5",
         "webpack-manifest-plugin": "^2.0.3",
+        "autoprefixer": "^9.1.5",
         "webpack-merge": "^4.1.4"
     }
 }
